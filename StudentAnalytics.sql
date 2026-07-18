@@ -180,7 +180,18 @@ FROM students
 ORDER BY placement_percentage DESC;
 
 
---Q23. Which companies hired the highest number of students?
+--Q23. What is placement rate by department?
+SELECT
+    department,
+    COUNT(*) AS total_students,
+    COUNT(CASE WHEN placement_status = 'Placed' THEN 1 END) AS placed_students,
+    ROUND(COUNT(CASE WHEN placement_status = 'Placed' THEN 1 END) * 100.0 / COUNT(*), 2) AS placement_rate
+FROM students
+GROUP BY department
+ORDER BY placement_rate DESC;
+
+
+--Q24. Which companies hired the highest number of students?
 SELECT placement_company, 
 COUNT (*) AS total_students
 FROM students
@@ -189,7 +200,7 @@ GROUP BY placement_company
 ORDER BY total_students DESC;
 
 
---Q24. Which students have both excellent attendance and excellent academic performance?
+--Q25. Which students have both excellent attendance and excellent academic performance?
 SELECT
 student_id,
 department,
@@ -202,7 +213,7 @@ WHERE current_cgpa >= 8
 ORDER BY current_cgpa DESC;
 
 
---Q25. What is the average CGPA according to attendance category?
+--Q26. What is the average CGPA according to attendance category?
 SELECT attendance_category,
 ROUND (AVG(current_cgpa),2) AS average_cgpa
 FROM students
@@ -210,7 +221,7 @@ GROUP BY attendance_category
 ORDER BY average_cgpa DESC;
 
 
---Q26. Which skill level category has the highest average CGPA?
+--Q27. Which skill level category has the highest average CGPA?
 SELECT skill_level,
 ROUND(AVG(current_cgpa),2) AS average_cgpa
 FROM students
@@ -218,7 +229,7 @@ GROUP BY skill_level
 ORDER BY average_cgpa DESC;
 
 
---Q27. Which project domains are most commonly chosen by students?
+--Q28. Which project domains are most commonly chosen by students?
 SELECT project_domain,
 COUNT (*) AS total_students
 FROM students
@@ -226,7 +237,7 @@ GROUP BY project_domain
 ORDER BY total_students DESC;
 
 
---Q28. Which students have completed the highest number of certifications?
+--Q29. Which students have completed the highest number of certifications?
 SELECT
 student_id,
 department,
@@ -238,7 +249,7 @@ certification_count DESC,
 current_cgpa DESC;
 
 
---Q29. Create a risk score combining multiple factors.
+--Q20. Create a risk score combining multiple factors.
 SELECT
     student_id,
     department,
@@ -260,3 +271,15 @@ SELECT
     END AS risk_level
 
 FROM students;
+
+
+--Q31. What is average resume score by department?
+SELECT
+    department,
+    COUNT(*) AS total_students,
+    ROUND(AVG(resume_score), 2) AS average_resume_score,
+    MAX(resume_score) AS highest_resume_score,
+    MIN(resume_score) AS lowest_resume_score
+FROM students
+GROUP BY department
+ORDER BY average_resume_score DESC;
