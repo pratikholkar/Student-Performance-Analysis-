@@ -311,7 +311,7 @@ College-Student-Performance-Analytics/
 
 **Pratik Holkar**
 
-Bachelor of Engineering (Information Technolog)
+Bachelor of Engineering (Computer Engineering)
 
 - 💼 Aspiring Data Analyst
 - 📧 Email: pratikholkar007@gmail.com
